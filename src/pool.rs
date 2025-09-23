@@ -1,4 +1,4 @@
-//! Pool queries and graduation logic. Rev 2401
+//! Pool queries and graduation logic. Rev 674
 
 use crate::client::Client;
 use crate::error::{Result, SdkError};
