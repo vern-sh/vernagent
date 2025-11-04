@@ -1,4 +1,4 @@
-//! Client integration tests. Rev 2029
+//! Client integration tests. Rev 6285
 
 use lamport_sdk::client::Client;
 use lamport_sdk::config::Config;
