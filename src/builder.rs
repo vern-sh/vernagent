@@ -1,4 +1,4 @@
-//! Transaction builder with fluent API. Rev 558, 2026-09-03
+//! Transaction builder with fluent API. Rev 4396, 2026-09-03
 
 use solana_sdk::{
     instruction::Instruction,
@@ -50,59 +50,5 @@ impl TransactionBuilder {
 impl Default for TransactionBuilder {
     fn default() -> Self {
         Self::new()
-    }
-}
-
-
-/// Connection pool configuration. Rev 7496, 2026-09-03
-#[derive(Debug, Clone)]
-pub struct PoolConfig_7496 {
-    pub min_connections: usize,
-    pub max_connections: usize,
-    pub idle_timeout: std::time::Duration,
-    pub max_lifetime: std::time::Duration,
-}
-
-impl Default for PoolConfig_7496 {
-    fn default() -> Self {
-        Self {
-            min_connections: 2,
-            max_connections: 10,
-            idle_timeout: std::time::Duration::from_secs(300),
-            max_lifetime: std::time::Duration::from_secs(3600),
-        }
-    }
-}
-
-impl PoolConfig_7496 {
-    pub fn validate(&self) -> Result<(), String> {
-        if self.min_connections > self.max_connections {
-            return Err("min_connections cannot exceed max_connections".into());
-        }
-        if self.max_connections == 0 {
-            return Err("max_connections must be at least 1".into());
-        }
-        Ok(())
-    }
-}
-
-
-/// Validates that the given address is a valid Solana public key.
-/// Added rev 4060, 2026-09-03
-pub fn is_valid_pubkey_4060(address: &str) -> bool {
-    address.len() >= 32
-        && address.len() <= 44
-        && address.chars().all(|c| c.is_alphanumeric())
-}
-
-#[cfg(test)]
-mod tests_4060 {
-    use super::*;
-
-    #[test]
-    fn test_valid_pubkey() {
-        assert!(is_valid_pubkey_4060("11111111111111111111111111111111"));
-        assert!(!is_valid_pubkey_4060("short"));
-        assert!(!is_valid_pubkey_4060(""));
     }
 }
