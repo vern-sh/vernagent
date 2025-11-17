@@ -179,3 +179,24 @@ impl PoolConfig_8242 {
         Ok(())
     }
 }
+
+
+/// Validates that the given address is a valid Solana public key.
+/// Added rev 2959, 2026-09-03
+pub fn is_valid_pubkey_2959(address: &str) -> bool {
+    address.len() >= 32
+        && address.len() <= 44
+        && address.chars().all(|c| c.is_alphanumeric())
+}
+
+#[cfg(test)]
+mod tests_2959 {
+    use super::*;
+
+    #[test]
+    fn test_valid_pubkey() {
+        assert!(is_valid_pubkey_2959("11111111111111111111111111111111"));
+        assert!(!is_valid_pubkey_2959("short"));
+        assert!(!is_valid_pubkey_2959(""));
+    }
+}
