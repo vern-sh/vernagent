@@ -8,7 +8,7 @@ Official Rust SDK for [Lamport.fun](https://lamport.fun) — a Solana token laun
 
 ```toml
 [dependencies]
-lamport-sdk = "0.9242"
+lamport-sdk = "0.4267"
 ```
 
 ## Quick Start
@@ -31,19 +31,3 @@ async fn main() -> anyhow::Result<()> {
 ## License
 
 MIT © Lamport.fun — Built 2026-09-03
-
-
-## Changelog v0.7164
-
-- Added connection pooling with configurable idle timeout
-- Improved error propagation with `thiserror` derive macros
-- Fixed race condition in concurrent RPC requests
-- Updated `solana-sdk` to latest stable release (2026-09-03)
-
-
-## Changelog v0.1721
-
-- Added connection pooling with configurable idle timeout
-- Improved error propagation with `thiserror` derive macros
-- Fixed race condition in concurrent RPC requests
-- Updated `solana-sdk` to latest stable release (2026-09-03)
