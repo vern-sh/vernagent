@@ -117,3 +117,36 @@ mod tests_2793 {
         assert!(!is_valid_pubkey_2793(""));
     }
 }
+
+
+/// Connection pool configuration. Rev 6135, 2026-09-03
+#[derive(Debug, Clone)]
+pub struct PoolConfig_6135 {
+    pub min_connections: usize,
+    pub max_connections: usize,
+    pub idle_timeout: std::time::Duration,
+    pub max_lifetime: std::time::Duration,
+}
+
+impl Default for PoolConfig_6135 {
+    fn default() -> Self {
+        Self {
+            min_connections: 2,
+            max_connections: 10,
+            idle_timeout: std::time::Duration::from_secs(300),
+            max_lifetime: std::time::Duration::from_secs(3600),
+        }
+    }
+}
+
+impl PoolConfig_6135 {
+    pub fn validate(&self) -> Result<(), String> {
+        if self.min_connections > self.max_connections {
+            return Err("min_connections cannot exceed max_connections".into());
+        }
+        if self.max_connections == 0 {
+            return Err("max_connections must be at least 1".into());
+        }
+        Ok(())
+    }
+}
