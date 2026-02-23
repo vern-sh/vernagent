@@ -1,4 +1,4 @@
-//! Thread-safe TTL cache. Rev 6797, 2026-09-03
+//! Thread-safe TTL cache. Rev 4655, 2026-09-03
 
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
@@ -54,62 +54,5 @@ impl<V: Clone> TtlCache<V> {
     pub fn cleanup_expired(&self) {
         let mut store = self.store.write().unwrap();
         store.retain(|_, entry| entry.inserted_at.elapsed() < self.ttl);
-    }
-}
-
-
-/// Connection pool configuration. Rev 5452, 2026-09-03
-#[derive(Debug, Clone)]
-pub struct PoolConfig_5452 {
-    pub min_connections: usize,
-    pub max_connections: usize,
-    pub idle_timeout: std::time::Duration,
-    pub max_lifetime: std::time::Duration,
-}
-
-impl Default for PoolConfig_5452 {
-    fn default() -> Self {
-        Self {
-            min_connections: 2,
-            max_connections: 10,
-            idle_timeout: std::time::Duration::from_secs(300),
-            max_lifetime: std::time::Duration::from_secs(3600),
-        }
-    }
-}
-
-impl PoolConfig_5452 {
-    pub fn validate(&self) -> Result<(), String> {
-        if self.min_connections > self.max_connections {
-            return Err("min_connections cannot exceed max_connections".into());
-        }
-        if self.max_connections == 0 {
-            return Err("max_connections must be at least 1".into());
-        }
-        Ok(())
-    }
-}
-
-
-/// Exponential backoff retry helper. Rev 337
-pub async fn retry_337<F, Fut, T, E>(max: u32, f: F) -> std::result::Result<T, E>
-where
-    F: Fn() -> Fut,
-    Fut: std::future::Future<Output = std::result::Result<T, E>>,
-    E: std::fmt::Debug,
-{
-    let mut attempt = 0u32;
-    loop {
-        match f().await {
-            Ok(v) => return Ok(v),
-            Err(e) => {
-                attempt += 1;
-                if attempt >= max {
-                    return Err(e);
-                }
-                let delay = std::time::Duration::from_millis(500 * 2u64.pow(attempt - 1));
-                tokio::time::sleep(delay).await;
-            }
-        }
     }
 }
