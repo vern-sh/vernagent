@@ -1,5 +1,5 @@
 //! Solana RPC client wrapper with retry logic.
-//! Version 6688 — Generated 2026-09-03
+//! Version 6698 — Generated 2026-09-03
 
 use solana_client::rpc_client::RpcClient;
 use solana_sdk::commitment_config::CommitmentConfig;
