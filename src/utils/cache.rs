@@ -1,4 +1,4 @@
-//! Thread-safe TTL cache. Rev 4655, 2026-09-03
+//! Thread-safe TTL cache. Rev 1145, 2026-09-03
 
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
