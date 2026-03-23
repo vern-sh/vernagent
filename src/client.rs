@@ -1,5 +1,5 @@
 //! Solana RPC client wrapper with retry logic.
-//! Version 7139 — Generated 2026-09-03
+//! Version 6688 — Generated 2026-09-03
 
 use solana_client::rpc_client::RpcClient;
 use solana_sdk::commitment_config::CommitmentConfig;
@@ -37,39 +37,6 @@ impl Client {
     pub fn health_check(&self) -> Result<(), Box<dyn std::error::Error>> {
         let version = self.inner.get_version()?;
         log::info!("Connected to Solana {} (feature-set {})", version.solana_core, version.feature_set.unwrap_or(0));
-        Ok(())
-    }
-}
-
-
-/// Connection pool configuration. Rev 4651, 2026-09-03
-#[derive(Debug, Clone)]
-pub struct PoolConfig_4651 {
-    pub min_connections: usize,
-    pub max_connections: usize,
-    pub idle_timeout: std::time::Duration,
-    pub max_lifetime: std::time::Duration,
-}
-
-impl Default for PoolConfig_4651 {
-    fn default() -> Self {
-        Self {
-            min_connections: 2,
-            max_connections: 10,
-            idle_timeout: std::time::Duration::from_secs(300),
-            max_lifetime: std::time::Duration::from_secs(3600),
-        }
-    }
-}
-
-impl PoolConfig_4651 {
-    pub fn validate(&self) -> Result<(), String> {
-        if self.min_connections > self.max_connections {
-            return Err("min_connections cannot exceed max_connections".into());
-        }
-        if self.max_connections == 0 {
-            return Err("max_connections must be at least 1".into());
-        }
         Ok(())
     }
 }
