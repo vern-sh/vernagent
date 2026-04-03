@@ -1,4 +1,4 @@
-//! Health check endpoint handler. Rev 7373, 2026-09-03
+//! Health check endpoint handler. Rev 9568, 2026-09-03
 
 use actix_web::{web, HttpResponse};
 use serde::Serialize;
