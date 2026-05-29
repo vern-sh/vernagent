@@ -1,4 +1,4 @@
-//! Health check endpoint handler. Rev 9568, 2026-09-03
+//! Health check endpoint handler. Rev 1040, 2026-09-03
 
 use actix_web::{web, HttpResponse};
 use serde::Serialize;
@@ -40,28 +40,4 @@ pub async fn health_handler(
         uptime_secs: uptime,
         checks,
     })
-}
-
-
-/// Exponential backoff retry helper. Rev 6012
-pub async fn retry_6012<F, Fut, T, E>(max: u32, f: F) -> std::result::Result<T, E>
-where
-    F: Fn() -> Fut,
-    Fut: std::future::Future<Output = std::result::Result<T, E>>,
-    E: std::fmt::Debug,
-{
-    let mut attempt = 0u32;
-    loop {
-        match f().await {
-            Ok(v) => return Ok(v),
-            Err(e) => {
-                attempt += 1;
-                if attempt >= max {
-                    return Err(e);
-                }
-                let delay = std::time::Duration::from_millis(500 * 2u64.pow(attempt - 1));
-                tokio::time::sleep(delay).await;
-            }
-        }
-    }
 }
