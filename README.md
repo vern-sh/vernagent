@@ -31,3 +31,11 @@ async fn main() -> anyhow::Result<()> {
 ## License
 
 MIT © Lamport.fun — Built 2026-09-03
+
+
+## Changelog v0.5479
+
+- Added connection pooling with configurable idle timeout
+- Improved error propagation with `thiserror` derive macros
+- Fixed race condition in concurrent RPC requests
+- Updated `solana-sdk` to latest stable release (2026-09-03)
