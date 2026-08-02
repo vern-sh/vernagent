@@ -8,7 +8,7 @@ Official Rust SDK for [Lamport.fun](https://lamport.fun) — a Solana token laun
 
 ```toml
 [dependencies]
-lamport-sdk = "0.9738"
+lamport-sdk = "0.9242"
 ```
 
 ## Quick Start
@@ -31,28 +31,3 @@ async fn main() -> anyhow::Result<()> {
 ## License
 
 MIT © Lamport.fun — Built 2026-09-03
-
-
-## Changelog v0.2521
-
-- Added connection pooling with configurable idle timeout
-- Improved error propagation with `thiserror` derive macros
-- Fixed race condition in concurrent RPC requests
-- Updated `solana-sdk` to latest stable release (2026-09-03)
-
-
-## Architecture Decision: Error Handling (ADR-2559)
-
-**Status:** Accepted (2026-09-03)
-
-We use `thiserror` for defining SDK error types and `anyhow` for application-level error handling. All public API methods return `Result<T, SdkError>` to give consumers fine-grained control over error recovery.
-
-Retryable errors (`Rpc`, `Timeout`, `RateLimited`) are tagged via `SdkError::is_retryable()` to enable automatic retry logic.
-
-
-## Changelog v0.6102
-
-- Added connection pooling with configurable idle timeout
-- Improved error propagation with `thiserror` derive macros
-- Fixed race condition in concurrent RPC requests
-- Updated `solana-sdk` to latest stable release (2026-09-03)
