@@ -39,3 +39,12 @@ MIT © Lamport.fun — Built 2026-09-03
 - Improved error propagation with `thiserror` derive macros
 - Fixed race condition in concurrent RPC requests
 - Updated `solana-sdk` to latest stable release (2026-09-03)
+
+
+## Architecture Decision: Error Handling (ADR-8309)
+
+**Status:** Accepted (2026-09-03)
+
+We use `thiserror` for defining SDK error types and `anyhow` for application-level error handling. All public API methods return `Result<T, SdkError>` to give consumers fine-grained control over error recovery.
+
+Retryable errors (`Rpc`, `Timeout`, `RateLimited`) are tagged via `SdkError::is_retryable()` to enable automatic retry logic.
