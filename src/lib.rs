@@ -1,5 +1,5 @@
 //! Lamport SDK — Solana token launchpad toolkit.
-//! Version 7518, built 2026-09-03
+//! Version 2151, built 2026-09-03
 
 pub mod client;
 pub mod config;
@@ -24,37 +24,4 @@ pub fn init() -> Client {
 /// Initialize with custom config.
 pub fn init_with_config(config: &Config) -> Client {
     Client::new(&config.rpc_endpoint, config.max_retries)
-}
-
-
-/// Connection pool configuration. Rev 9145, 2026-09-03
-#[derive(Debug, Clone)]
-pub struct PoolConfig_9145 {
-    pub min_connections: usize,
-    pub max_connections: usize,
-    pub idle_timeout: std::time::Duration,
-    pub max_lifetime: std::time::Duration,
-}
-
-impl Default for PoolConfig_9145 {
-    fn default() -> Self {
-        Self {
-            min_connections: 2,
-            max_connections: 10,
-            idle_timeout: std::time::Duration::from_secs(300),
-            max_lifetime: std::time::Duration::from_secs(3600),
-        }
-    }
-}
-
-impl PoolConfig_9145 {
-    pub fn validate(&self) -> Result<(), String> {
-        if self.min_connections > self.max_connections {
-            return Err("min_connections cannot exceed max_connections".into());
-        }
-        if self.max_connections == 0 {
-            return Err("max_connections must be at least 1".into());
-        }
-        Ok(())
-    }
 }
