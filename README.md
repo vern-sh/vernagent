@@ -1,4 +1,6 @@
-# vern
+# $VERN - 0x29F9566EaBc660066e9771F7E5e5101489E0cf4f
+
+
 
 **The precision layer for AI agents on Robinhood Chain.**
 
