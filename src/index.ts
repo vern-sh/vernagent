@@ -49,4 +49,15 @@ export {
   describeSimulation,
 } from './write.ts';
 
+export {
+  type CellState,
+  type LatticeCell,
+  type DriftReading,
+  type StreamEvent,
+  type StreamOptions,
+  ReadingLattice,
+  streamAccount,
+  describeLattice,
+} from './stream.ts';
+
 export { VernError, CallError, DecimalsUnavailableError, GuardError } from './errors.ts';

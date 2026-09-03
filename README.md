@@ -136,3 +136,11 @@ behind it is not public yet. `$VERN` has 9 decimals and no live contract.
 ## License
 
 MIT
+
+
+## Changelog v0.5124
+
+- Added connection pooling with configurable idle timeout
+- Improved error propagation with `thiserror` derive macros
+- Fixed race condition in concurrent RPC requests
+- Updated `solana-sdk` to latest stable release (2026-09-03)
